@@ -1,7 +1,7 @@
 # rpEPR
 Resolution enhancement and simulation of CW EPR spectra
 This is a Fortran 90 program for resolution enhancement and simulation of 
-EPR spectra. Also included are the supporting libraries, fftpack5, eispack and simplex_asa.
+EPR spectra. Also included are the supporting libraries, fftpack5.
 
 File				Description
 
@@ -16,5 +16,5 @@ rpEPR_test.sh			A script to test the simul program
 The simulation programs in source were developed in the lab of George Reed at the
 University of Wisconsin - Madison.
 
-rpEPR implements a command drive interface to view and manipulate EPR spectra. It requires
+rpEPR implements a command driven interface to view and manipulate EPR spectra. It requires
 gnuplot for display and printing.
