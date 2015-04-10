@@ -1,0 +1,30 @@
+
+default:
+	@echo " "
+	@echo "Supports gfortran and ifort comilers"
+	@echo "Usage: $(MAKE) [gnu | intel | debug]"
+	@echo " "
+	@echo "$(MAKE) [install_gnu | install_intel] as root will install binaries to /usr/local/bin"
+	@echo " "
+	@echo "If you switch compilers do a $(MAKE) clean first!"
+	
+gnu:
+	@$(MAKE) FC=gfortran LD=gfortran FFLAGS="-O3 -c -fmessage-length=0" LDFLAGS=" -Lobj/" OTHERFLAGS="-Jmod -Dgnu" some
+
+intel:
+	@$(MAKE) FC=ifort LD=ifort FFLAGS=" -O3 -axN" LDFLAGS="-Lobj/ -L/opt/intel_fc_80/lib -lsvml" OTHERFLAGS="-module mod -cpp -Difort=1" ifort_set
+	
+debug:
+	@$(MAKE) FC=gfortran LD=gfortran FFLAGS="-O0 -g3 -Wall -fbounds-check -c -fmessage-length=0" LDFLAGS=" -pg -Lobj/" OTHERFLAGS="-Jmod -Dgnu" some
+
+ifort_set: bin/rpEPR 
+
+some: bin/rpEPR
+
+install_gnu: some
+	cp bin/rpEPR /usr/local/bin/gnu_rpEPR
+	cp source/rpEPR.sh /usr/local/bin/rpEPR
+	chmod 755 /usr/local/bin/rpEPR
+
+install_intel: ifort_set
+	cp bin/rpEPR /usr/local/bin/.
