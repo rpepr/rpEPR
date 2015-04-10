@@ -11,10 +11,8 @@
       use spectrum_parameters
       use atom_types
       use init_atoms
-      use setup_routines
       use gaussian_line
       use physical_constants
-      use spectrum_calculate
       use spectrum_parameter_handlers
 
       implicit none
