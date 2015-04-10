@@ -667,10 +667,6 @@
         ! Write a binary parameter file
         if(parmflag)then
          call write_parms(specpt,ierr)
-         ! open(11,file=trim(specpt%fname)//'.par',status="replace",form='unformatted')
-         ! write(11) specpt
-         ! close(11)
-         ! write(*,*) 'Wrote parameters to file: '//trim(specpt%fname)//'.par'
         endif
 
       case ('label')
@@ -729,15 +725,6 @@
         ! Display the FID in gnuplot, and get the user to set the cutoff using the mouse
         do i=1,kb/2
           write(11,*) i/(xstep*kb),abs(scr1(i))
-        end do
-        close(11)
-        ! Dump the complex fid to a file for figures
-        open(11,file=trim(specfile)//'_fid',status="replace")
-        do i=kb/2,kb
-          write(11,*) (i-kb)/(xstep*kb),real(scr1(i)),imag(scr1(i))
-        end do
-        do i=1,kb/2
-          write(11,*) i/(xstep*kb),real(scr1(i)),imag(scr1(i))
         end do
         close(11)
         open(11,file="my_mouse")
@@ -952,15 +939,6 @@
           do i = 1, kb
             fid(i)=scr1(i)*apod(i)
           enddo
-          ! Write the window and the new fid to a file
-          open(11,file=trim(specfile)//"_refid",status="replace")
-          do i=kb/2,kb
-            write(11,*) (i-kb)/(xstep*kb),real(fid(i)),imag(fid(i)),apod(i)
-          enddo
-          do i=1,kb/2
-            write(11,*) i/(xstep*kb),real(fid(i)),imag(fid(i)),apod(i)
-          enddo
-          close(11)
           ! Transform back to the spectrum
           call cfft1f(kb,1,fid,lenspec,wsave,lensave,work,lenwork,ierr)
 
